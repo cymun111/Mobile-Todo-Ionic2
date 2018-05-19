@@ -4,31 +4,40 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { PendingToDo } from '../pages/pending/pending';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { DatabaseProvider } from '../providers/database/database';
+import { AlertController } from 'ionic-angular';
+
+import { SQLite } from '@ionic-native/sqlite';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    PendingToDo
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    PendingToDo
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    SQLite,
+    AlertController,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DatabaseProvider
   ]
 })
 export class AppModule {}
